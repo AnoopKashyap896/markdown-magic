@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Big Supermarket — Markdown Control</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode" defer></script>
+    <script src="./config.js"></script>
+  </head>
+  <body>
+    <main class="wrap">
+      <header class="hero">
+        <h1>The Big Supermarket</h1>
+        <p class="lede">
+          Smart markdown control: standard markdown covers expiry today and tomorrow, and public holidays extend
+          the window automatically.
+        </p>
+        <p class="subtle" id="dataMode"></p>
+      </header>
+
+      <section class="panel">
+        <h2>Store day</h2>
+        <label class="field inline">
+          <span>Business date</span>
+          <input type="date" id="scanDate" />
+        </label>
+      </section>
+
+      <section class="panel">
+        <h2>Public holiday planning</h2>
+        <p class="subtle">
+          Example: if 3rd is a holiday, on 1st markdown can include till 3rd; on 2nd till 4th.
+        </p>
+        <form id="addHolidayForm" class="add-grid holidays-grid">
+          <label class="field">
+            <span>Holiday date</span>
+            <input type="date" id="holidayDate" required />
+          </label>
+          <label class="field">
+            <span>Name (optional)</span>
+            <input type="text" id="holidayName" placeholder="Public holiday" />
+          </label>
+          <button type="submit" class="btn">Add holiday</button>
+        </form>
+        <ul id="holidayList" class="holiday-list"></ul>
+      </section>
+
+      <section class="panel">
+        <h2>Inventory lots</h2>
+        <p class="subtle">Each lot has its own date. Status and markdown update when you change business date.</p>
+        <div class="table-wrap">
+          <table class="lots-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Lot</th>
+                <th>Use-by</th>
+                <th>Qty</th>
+                <th>Status</th>
+                <th>Base</th>
+                <th>Final</th>
+                <th>QR</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="lotsBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Add lot (multiple dates support)</h2>
+        <form id="addLotForm" class="add-grid">
+          <label class="field">
+            <span>Product</span>
+            <select id="newProduct"></select>
+          </label>
+          <label class="field">
+            <span>Use-by date</span>
+            <input type="date" id="newUseBy" required />
+          </label>
+          <label class="field">
+            <span>Quantity</span>
+            <input type="number" id="newQty" min="1" value="1" required />
+          </label>
+          <button type="submit" class="btn">Add lot</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2>POS checkout</h2>
+        <div class="checkout">
+          <div>
+            <div class="actions">
+              <button type="button" id="startCamera" class="btn">Start camera scan</button>
+              <button type="button" id="stopCamera" class="btn secondary">Stop camera</button>
+            </div>
+            <div id="qrReader" class="qr-reader"></div>
+            <p class="subtle">Supports camera QR and keyboard-wedge scanner input.</p>
+            <div class="actions">
+              <input id="scannerInput" class="text-input" placeholder="Scanner gun input (auto-submit on Enter)" />
+            </div>
+            <div class="actions">
+              <input id="manualQr" class="text-input" placeholder="mm:v2:PRODUCT:LOT" />
+              <button type="button" id="scanManual" class="btn">Scan payload</button>
+            </div>
+            <p id="scanFeedback" class="feedback"></p>
+            <div class="recognized" id="recognizedPanel">
+              <p class="recognized-title">Last recognized scan</p>
+              <p id="recognizedProduct">No product scanned yet.</p>
+              <p id="recognizedMeta" class="subtle"></p>
+              <p id="recognizedPrice" class="recognized-price"></p>
+            </div>
+          </div>
+          <div>
+            <h3>Cart</h3>
+            <ul id="cartList" class="cart-list"></ul>
+            <p class="total">Total: <span id="cartTotal">$0.00</span></p>
+            <button type="button" id="clearCart" class="btn secondary">Clear cart</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>QR cards for testing</h2>
+        <p class="subtle">Scan from phone camera or another device camera scanner.</p>
+        <p class="subtle"><a href="./customer-qr-labels.html">Open printable customer QR labels</a></p>
+        <div id="qrCards" class="qr-grid"></div>
+      </section>
+    </main>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,370 @@
+:root {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: #1f2937;
+  line-height: 1.4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: inherit;
+  font-family: inherit;
+  line-height: inherit;
+  background-color: #ecfdf5;
+  background-image:
+    radial-gradient(ellipse 130% 85% at 50% -25%, rgba(16, 185, 129, 0.28), transparent 52%),
+    radial-gradient(ellipse 70% 55% at 100% 35%, rgba(20, 184, 166, 0.14), transparent 46%),
+    radial-gradient(ellipse 55% 45% at -5% 75%, rgba(5, 150, 105, 0.1), transparent 48%),
+    linear-gradient(168deg, #f7fee7 0%, #ecfdf5 38%, #f0fdf4 72%, #dff7ec 100%);
+  background-attachment: fixed;
+}
+
+/* Soft “aisle grid” + vignette — decorative only */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.55;
+  background-image:
+    repeating-linear-gradient(
+      88deg,
+      transparent 0,
+      transparent 21px,
+      rgba(15, 118, 110, 0.035) 21px,
+      rgba(15, 118, 110, 0.035) 22px
+    ),
+    repeating-linear-gradient(
+      -2deg,
+      transparent 0,
+      transparent 21px,
+      rgba(15, 118, 110, 0.03) 21px,
+      rgba(15, 118, 110, 0.03) 22px
+    );
+  mask-image: radial-gradient(ellipse 95% 72% at 50% 42%, #000 35%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 95% 72% at 50% 42%, #000 35%, transparent 75%);
+}
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 2rem;
+}
+
+.hero {
+  position: relative;
+  padding: 1.1rem 1.15rem;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(236, 253, 245, 0.72) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 8px 28px rgba(15, 118, 110, 0.07), 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 1.9rem;
+  color: #052e16;
+}
+
+.lede {
+  margin-top: 0.5rem;
+  color: #374151;
+  max-width: 60rem;
+}
+
+.panel {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-top: 1rem;
+  box-shadow: 0 4px 22px rgba(15, 118, 110, 0.06), 0 2px 6px rgba(15, 23, 42, 0.04);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+h3 {
+  margin: 0 0 0.5rem;
+}
+
+.subtle {
+  margin: 0 0 0.75rem;
+  color: #64748b;
+  font-size: 0.87rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+}
+
+.field.inline {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+input,
+select {
+  border: 1px solid #9fb1c6;
+  border-radius: 8px;
+  padding: 0.45rem 0.55rem;
+  font: inherit;
+  min-height: 2rem;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.lots-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.lots-table th,
+.lots-table td {
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+  vertical-align: top;
+  padding: 0.55rem 0.4rem;
+}
+
+.lots-table code {
+  font-size: 0.7rem;
+  word-break: break-all;
+}
+
+.mini {
+  border: 1px solid #0ea5e9;
+  color: #0369a1;
+  background: #f0f9ff;
+  border-radius: 6px;
+  padding: 0.3rem 0.5rem;
+  cursor: pointer;
+}
+
+.mini:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.mini.danger {
+  border-color: #fca5a5;
+  color: #b91c1c;
+  background: #fef2f2;
+}
+
+.row-actions {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.add-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(4, minmax(140px, 1fr));
+  align-items: end;
+}
+
+.holidays-grid {
+  grid-template-columns: repeat(3, minmax(160px, 1fr));
+}
+
+.holiday-list {
+  list-style: none;
+  margin: 0.8rem 0 0;
+  padding: 0;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.holiday-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.65rem;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 0.85rem;
+}
+
+.holiday-list li:last-child {
+  border-bottom: none;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  border: none;
+  background: #0f766e;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.45rem 0.8rem;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+}
+
+.btn.secondary {
+  background: #475569;
+}
+
+.checkout {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 1rem;
+}
+
+.qr-reader {
+  width: 100%;
+  min-height: 210px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f8fafc;
+  margin-bottom: 0.5rem;
+}
+
+.text-input {
+  flex: 1;
+  min-width: 220px;
+}
+
+.feedback {
+  min-height: 1.25rem;
+  color: #0f766e;
+  font-size: 0.85rem;
+  margin: 0.5rem 0 0;
+}
+
+.feedback.error {
+  color: #b91c1c;
+}
+
+.recognized {
+  margin-top: 0.6rem;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 0.55rem 0.7rem;
+}
+
+.recognized-title {
+  margin: 0 0 0.2rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.recognized p {
+  margin: 0.18rem 0;
+}
+
+.recognized-price {
+  font-weight: 700;
+  color: #0f766e;
+}
+
+.cart-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid #d6dee8;
+  border-radius: 8px;
+  max-height: 280px;
+  overflow: auto;
+}
+
+.cart-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.85rem;
+}
+
+.cart-list li:last-child {
+  border-bottom: none;
+}
+
+.total {
+  margin: 0.75rem 0;
+  font-weight: 700;
+}
+
+.qr-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.qr-card {
+  border: 1px solid #d6dee8;
+  border-radius: 10px;
+  padding: 0.7rem;
+  background: #f8fafc;
+}
+
+.qr-card h4 {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.qr-card p {
+  margin: 0.35rem 0;
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.qr-box {
+  background: #fff;
+  border-radius: 6px;
+  display: inline-block;
+  padding: 0.25rem;
+}
+
+.qr-card code {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.68rem;
+  word-break: break-all;
+}
+
+@media (max-width: 900px) {
+  .checkout {
+    grid-template-columns: 1fr;
+  }
+  .add-grid {
+    grid-template-columns: 1fr;
+  }
+}
